@@ -21,13 +21,13 @@ class Solution:
       ## probably want to copy by value? idk
       runner.next = l1 or l2
       
-      return retval.next;
+      return retval.next
 
 s = Solution()
 l1 = ListNode(1, ListNode(2, ListNode(4)))
 l2 = ListNode(5, ListNode(5, ListNode(6)))
 
-l3 = s.mergeTwoLists(l1,l2);
+l3 = s.mergeTwoLists(l1,l2)
 
 print("after merge")
 while l3:

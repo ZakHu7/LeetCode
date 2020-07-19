@@ -1,0 +1,1 @@
+Q28 z-algorithm (can also use KMP) - string matching
