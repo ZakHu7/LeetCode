@@ -1,1 +1,1 @@
-Q28 z-algorithm (can also use KMP) - string matching
+Q28 String matching use KMP - Goood to find same pattern in many text since preprocessing pattern.

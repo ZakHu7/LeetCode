@@ -2,61 +2,49 @@ class Solution:
     def threeSum(self, nums):
         if len(nums) < 3:
             return []
+        sortedNums = sorted(nums)
         sol = []
-        numsSorted = sorted(nums)
-        start = 0
-        end = len(numsSorted) - 1
-
-        while start + 1< end:
-            lookingFor = -(numsSorted[start] + numsSorted[end])
-
-            if lookingFor < 0:
-                for i in range(start + 1, end):
-                    if lookingFor < numsSorted[i]:
+        first = 0
+        while first < len(sortedNums) - 2:
+            second = first + 1
+            third = len(sortedNums) - 1
+            while second < third:
+                if sortedNums[first] + sortedNums[second] + sortedNums[third] == 0:
+                    sol.append([sortedNums[first], sortedNums[second], sortedNums[third]])
+                    
+                    val = sortedNums[second]
+                    while sortedNums[second] == val and second < third:
+                        second += 1
+                    if second == third:
                         break
-                    if lookingFor == numsSorted[i]:
-                        sol.append([numsSorted[start],numsSorted[i],numsSorted[end]])
+                    val = sortedNums[third]
+                    while sortedNums[third] == val and second < third:
+                        third -= 1
+                    if second == third:
                         break
-                end -= 1
-
-                while end >= 0 and numsSorted[end + 1] == numsSorted[end]:
-                    end -= 1
-
-            elif lookingFor > 0:
-                for i in range(end - 1, start, -1):
-                    if lookingFor > numsSorted[i]:
+                elif sortedNums[first] + sortedNums[second] + sortedNums[third] < 0:
+                    val = sortedNums[second]
+                    while sortedNums[second] == val and second < third:
+                        second += 1
+                    if second == third:
                         break
-                    if lookingFor == numsSorted[i]:
-                        sol.append([numsSorted[start],numsSorted[i],numsSorted[end]])
+                elif sortedNums[first] + sortedNums[second] + sortedNums[third] > 0:
+                    val = sortedNums[third]
+                    while sortedNums[third] == val and second < third:
+                        third -= 1
+                    if second == third:
                         break
-                start += 1
-
-                while start < len(numsSorted) and numsSorted[start - 1] == numsSorted[start]:
-                    start += 1
-            else:
-                for i in range(end - 1, start, -1):
-                    if lookingFor == numsSorted[i]:
-                        sol.append([numsSorted[start],numsSorted[i],numsSorted[end]])
-                        break
-                if numsSorted[end - 1] + numsSorted[start + 1] < 0:
-                    start += 1
-                    while start < len(numsSorted) and numsSorted[start - 1] == numsSorted[start]:
-                        start += 1
-                elif numsSorted[end - 1] + numsSorted[start + 1] < 0:
-                    end -= 1
-                    while end >= 0 and numsSorted[end + 1] == numsSorted[end]:
-                        end -= 1
-                else: break
-
-
+            val = sortedNums[first]
+            while sortedNums[first] == val and first < len(sortedNums) - 1:
+                first += 1
         return sol
 
 s = Solution()
 
-nums = [-1, 0, 1, 2, -1, -4]
-nums = [-2,-1,-1,0,1,2]
+sortedNums = [-1, 0, 1, 2, -1, -4]
+sortedNums = [0,0]
 
-print(s.threeSum(nums))
+# print(s.threeSum(sortedNums))
 
 
          
