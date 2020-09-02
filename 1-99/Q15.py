@@ -45,6 +45,4 @@ sortedNums = [-1, 0, 1, 2, -1, -4]
 sortedNums = [0,0]
 
 # print(s.threeSum(sortedNums))
-
-
-         
+#🙃🙃🙃
