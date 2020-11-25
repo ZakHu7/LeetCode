@@ -54,6 +54,8 @@ class Solution():
           continue
       leftPointer, rightPointer = i+1, len(nums)-1
       while leftPointer < rightPointer:
+        if nums[rightPointer] < 0:
+            break
         if nums[leftPointer] + nums[rightPointer] == -nums[i]:
           sol = [nums[i], nums[leftPointer], nums[rightPointer]]
           res[str(sol)] = sol
