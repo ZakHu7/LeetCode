@@ -1,0 +1,21 @@
+class Solution():
+  def threeSum(self, nums):
+    res = {}
+    if len(nums) < 3:
+      return res
+    
+    nums.sort()
+    for i in range(len(nums)):
+      if nums[i] > 0:
+        break
+      leftPointer, rightPointer = i+1, len(nums)-1
+      while leftPointer < rightPointer:
+        if nums[leftPointer] + nums[rightPointer] == -nums[i]:
+          res.add([nums[i], nums[leftPointer], nums[rightPointer]])
+          leftPointer += 1
+          rightPointer -= 1
+        elif nums[leftPointer] + nums[rightPointer] < -nums[i]:
+          leftPointer += 1
+        else:
+          rightPointer -= 1
+    return list(res)
