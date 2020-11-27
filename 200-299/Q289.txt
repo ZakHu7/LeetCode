@@ -1,0 +1,35 @@
+class Solution:
+  def gameOfLife(self, board: [[int]]) -> None:
+    """
+    Do not return anything, modify board in-place instead.
+    """
+    if len(board) == 0 or len(board[0]) == 0:
+      return
+    toFlipList = []
+    for r in range(len(board)):
+      for c in range(len(board[0])):
+        if self.checkCellFlip(board, r, c):
+          toFlipList.append((r,c))
+
+    for pair in toFlipList:
+      board[pair[0]][pair[1]] = 0 if board[pair[0]][pair[1]] == 1 else 1
+
+  def checkCellFlip(self, board, r, c):
+    neighbours = 0
+    for i in [-1,0,1]:
+      for j in [-1,0,1]:
+        if i == 0 and j == 0:
+          continue
+        neighbours += self.checkNeighbour(board, r+i, c+j)
+    if board[r][c] == 1:
+      if neighbours < 2 or neighbours > 3:
+        return True
+    else:
+      if neighbours == 3:
+        return True
+    return False
+        
+  def checkNeighbour(self, board, r, c):
+    if r < 0 or r >= len(board) or c < 0 or c >= len(board[0]):
+      return 0
+    return board[r][c]
