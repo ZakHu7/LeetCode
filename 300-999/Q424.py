@@ -14,7 +14,6 @@ class Solution:
         start += 1
       
       res = max(res, end - start)
-      # BBABCAC
 
     return res
     
