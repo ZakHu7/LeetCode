@@ -2,8 +2,8 @@ from typing import Collection, List
 from collections import deque
 class Course:
   def __init__(self):
-    self.preReq = set()
-    self.blocking = set()
+    self.children = set()
+    self.count = 0
 
 class Solution:
   def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
@@ -11,21 +11,23 @@ class Solution:
     for i in range(numCourses):
       courses[i] = Course()
       
+    coursesBegin = [True] * numCourses
     for prerequisite in prerequisites:
-      courses[prerequisite[0]].preReq.add(courses[prerequisite[1]])
-      courses[prerequisite[1]].blocking.add(courses[prerequisite[0]])
+      courses[prerequisite[1]].children.add(courses[prerequisite[0]])
+      courses[prerequisite[0]].count += 1
+      coursesBegin[prerequisite[0]] = False
     
     queue = deque()
     for i in range(numCourses):
-      if len(courses[i].preReq) == 0:
+      if coursesBegin[i]:
         queue.append(courses[i])
         
     while queue:
       course = queue.popleft()
       numCourses -= 1
-      for blocked in course.blocking:
-        blocked.preReq.remove(course)
-        if len(blocked.preReq) == 0:
-          queue.append(blocked)
+      for child in course.children:
+        child.count -= 1
+        if child.count == 0:
+          queue.append(child)
     return numCourses == 0
       
